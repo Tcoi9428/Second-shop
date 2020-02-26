@@ -42,7 +42,12 @@ class MySql
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 
-    public function insert(){
+    public function insert( string $table_name , array $values){
+        /*$table_name = $table_name;
+        $values = $values;
+        foreach($values as $value){
+            echo $value;
+        }*/
         return mysqli_insert_id($this->connect());
     }
     private function checkErrors() {

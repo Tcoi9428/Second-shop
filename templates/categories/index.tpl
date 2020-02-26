@@ -8,7 +8,7 @@
         <div class="col-md-12 category-card">
             <p class="card-text category-name">{$e.name}</p>
             <a href="/categories/edit.php?category_id={$e.id}"class="btn btn-primary">Редактировать</a>
-            <form action="/categories/editing.php" method="POST">
+            <form action="/categories/delete.php" method="POST">
                 <input type="hidden" value="{$e.id}" name="delete_id">
                 <button type="submit"  class="btn btn-sm btn-outline-secondary">Удалить</button>
             </form>

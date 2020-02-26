@@ -1,6 +1,9 @@
 <?php
+
+use App\Controller\Product;
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../App/bootstrap.php';
-$product_id = (int) $_POST['product_id'];
+/*$product_id = (int) $_POST['product_id'];
 $name = (string) $_POST['name'];
 $price = (float) $_POST['price'];
 $amount = (int) $_POST['amount'];
@@ -40,4 +43,5 @@ if (!empty($categories)) {
     $query = "INSERT INTO products_categories(product_id, category_id) VALUES $categories";
     $result = DataBase()->query($query);
 }
-header('Location: /');
+header('Location: /');*/
+Product::create();
