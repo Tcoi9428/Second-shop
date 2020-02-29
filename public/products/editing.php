@@ -44,4 +44,4 @@ if (!empty($categories)) {
     $result = DataBase()->query($query);
 }
 header('Location: /');*/
-Product::create();
+Product::editing();

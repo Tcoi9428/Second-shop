@@ -41,15 +41,44 @@ class MySql
         $result = $this->query($query);
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
-
+    public function fetchRow($query, string $class_name) {
+        $result = $this->query($query);
+        return mysqli_fetch_object($result, $class_name);
+    }
     public function insert( string $table_name , array $values){
-        /*$table_name = $table_name;
-        $values = $values;
-        foreach($values as $value){
-            echo $value;
-        }*/
+        $table_name = $this->escape($table_name);
+        $values  = $values;
+        $insert_fields = [];
+        $insert_values = [];
+        foreach ($values as $key=> $value) {
+            $insert_fields[] = $this->escape($key);
+            $insert_values[] = "'".$value."'";
+        }
+        $insert_fields = implode(',' , $insert_fields);
+        $insert_values = implode(',' , $insert_values);
+        $query = "INSERT INTO $table_name($insert_fields) VALUES ($insert_values)";
+        $this->query($query);
         return mysqli_insert_id($this->connect());
     }
+
+    public  function update(string $table_name , array $values , string $where){
+        $table_name = $table_name;
+        $values = $values;
+        $where = $where;
+        $insert_values = [];
+        foreach ($values as $key=> $value){
+            $insert_values[] = $key.'='.$value;
+        }
+        $insert_values = implode(',',$insert_values);
+
+        $query = "UPDATE $table_name SET $insert_values WHERE $where";
+         return $this->query($query);
+    }
+    public function deleteItem(string $table_name , string $where){
+        $query = "DELETE FROM $table_name WHERE $where";
+        return $this->query($query);
+    }
+
     private function checkErrors() {
         $mysqli_errno = mysqli_errno($this->connect());
         if (!$mysqli_errno) {
@@ -58,5 +87,8 @@ class MySql
         $mysqli_error = mysqli_error($this->connect());
         $message = "Mysql query error: ($mysqli_errno) $mysqli_error";
         die($message);
+    }
+    private function escape(string $value) {
+        return mysqli_real_escape_string($this->connect(), $value);
     }
 }

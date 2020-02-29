@@ -41,7 +41,9 @@ class RequestService
     public static function getArrayFromGet(string $key, $default = []) {
         return (array) static::getRawFromGet($key, $default);
     }
-
+    public static  function getAllFromPost(){
+        return $_POST;
+    }
     public static function redirect(string $path) {
         header('Location: ' . $path);
     }

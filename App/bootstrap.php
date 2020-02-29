@@ -21,7 +21,6 @@ function smarty(){
 
     if (is_null($smarty)) {
         $smarty = new Smarty();
-
         $smarty->template_dir = $config['template']['template_dir'];
         $smarty->compile_dir = $config['template']['compile_dir'];
         $smarty->cache_dir = $config['template']['cache_dir'];

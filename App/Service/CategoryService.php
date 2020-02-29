@@ -30,6 +30,7 @@ class CategoryService
         $query = "UPDATE categories SET name='$name' WHERE id=$id";
         return DataBase()->query($query);
     }
+
     private function create(){
         $name = RequestService::getStringFromPost('name');
         $query = "INSERT INTO categories (name) VALUES ('$name')";

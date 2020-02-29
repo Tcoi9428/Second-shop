@@ -4,6 +4,8 @@
 namespace App\Service;
 
 
+use App\Model\Product;
+
 class ProductService
 {
 
@@ -23,18 +25,37 @@ class ProductService
 
         return array($products,$vendors,$categories);
     }
-    public  static  function create(){
-        /*$name = RequestService::getStringFromPost('name');
-        $price = RequestService::getFloatFromPost('price');
-        $amount = RequestService::getIntFromPost('amount');
-        $description =RequestService::getStringFromPost('description');
-        $vendor_id = RequestService::getIntFromPost('vendor_id');
-        $categories_ids =RequestService::getArrayFromPost('categories_ids');*/
-        
-        /*$value = "$name,$price,$amount,$description,$vendor_id";
-        
-        return $values = explode(',' ,$value);*/
-        $values = $_POST;
-        return $keys = array_keys($values);
+
+    /**
+     * @param int $product_id
+     * @return Product
+     */
+    public static function getEditItem( int $product_id) : Product{
+        $product_id = $product_id;
+        $query = " SELECT * FROM products WHERE id=$product_id";
+        $product = DataBase()->fetchRow($query ,Product::class);
+        return $product;
     }
+    public  static  function save(Product $product){
+        $data = [
+          'name'=> $product->getName(),
+          'price'=>$product->getPrice(),
+          'amount'=>$product->getAmount(),
+          'vendor_id'=>$product->getVendorId(),
+          'description'=>$product->getDescription(),
+        ];
+        $product_id = $product->getId();
+        if ($product_id > 0){
+            DataBase()->update('products' , $data , 'id='.$product_id);
+        }else{
+            DataBase()->insert('products',$data);
+        }
+    }
+    public static function delete(){
+        $delete_id = RequestService::getIntFromPost('product_id');
+        if($delete_id){
+            return DataBase()->deleteItem('products','id='."$delete_id");
+        }
+    }
+
 }

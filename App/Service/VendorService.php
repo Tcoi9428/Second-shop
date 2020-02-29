@@ -31,7 +31,7 @@ class VendorService
         return DataBase()->query($query);
     }
     private function create(){
-        $name = RequestService::getStringFromPost('name');
+        $name  = RequestService::getStringFromPost('name');
         $query = "INSERT INTO vendors (name) VALUES ('$name')";
         return DataBase()->query($query);
     }
