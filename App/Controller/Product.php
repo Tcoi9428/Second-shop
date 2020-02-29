@@ -39,7 +39,7 @@ class Product
     }
 
     public static function editing(){
-        $product_id = RequestService::getIntFromGet('id');
+        $product_id = RequestService::getIntFromPost('product_id');
         $name = RequestService::getStringFromPost('name');
         $price = RequestService::getFloatFromPost('price');
         $amount = RequestService::getIntFromPost('amount');

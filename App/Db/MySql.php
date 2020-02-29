@@ -52,7 +52,7 @@ class MySql
         $insert_values = [];
         foreach ($values as $key=> $value) {
             $insert_fields[] = $this->escape($key);
-            $insert_values[] = "'".$value."'";
+            $insert_values[] = "'$value'";
         }
         $insert_fields = implode(',' , $insert_fields);
         $insert_values = implode(',' , $insert_values);
@@ -67,12 +67,12 @@ class MySql
         $where = $where;
         $insert_values = [];
         foreach ($values as $key=> $value){
-            $insert_values[] = $key.'='.$value;
+            $insert_values[] = "$key"."=" ."'$value'";
         }
         $insert_values = implode(',',$insert_values);
-
+        echo '<pre>'; var_dump($insert_values); echo '</pre>';
         $query = "UPDATE $table_name SET $insert_values WHERE $where";
-         return $this->query($query);
+        return $this->query($query);
     }
     public function deleteItem(string $table_name , string $where){
         $query = "DELETE FROM $table_name WHERE $where";

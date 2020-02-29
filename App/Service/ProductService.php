@@ -36,18 +36,19 @@ class ProductService
         $product = DataBase()->fetchRow($query ,Product::class);
         return $product;
     }
-    public  static  function save(Product $product){
+    public static function save(Product $product){
         $data = [
           'name'=> $product->getName(),
-          'price'=>$product->getPrice(),
-          'amount'=>$product->getAmount(),
-          'vendor_id'=>$product->getVendorId(),
-          'description'=>$product->getDescription(),
+          'price'=> $product->getPrice(),
+          'amount'=> $product->getAmount(),
+          'vendor_id'=> $product->getVendorId(),
+          'description' => $product->getDescription()
         ];
         $product_id = $product->getId();
         if ($product_id > 0){
             DataBase()->update('products' , $data , 'id='.$product_id);
-        }else{
+        }
+        else{
             DataBase()->insert('products',$data);
         }
     }

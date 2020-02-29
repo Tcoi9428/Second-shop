@@ -39,8 +39,7 @@ class Product
     /**
      * @var string
      */
-    protected $description;
-
+    protected $description='';
 
     /**
      * @return int

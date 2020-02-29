@@ -31,12 +31,10 @@
                 {/foreach}
         </select>
     </div>
-
     <div class="form-group">
         <label for="product_description">Описание товара</label>
         <textarea id="product_description" name="description" class="form-control" rows="3">{$product->getDescription()}</textarea>
     </div>
-
     <button type="submit" class="btn btn-primary mb-2">Добавить</button>
 </form>
 {include file = 'bottom.tpl'}
