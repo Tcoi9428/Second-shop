@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\Vendor as VendorModel;
 use App\Service\RequestService;
 use App\Service\VendorService;
 
@@ -16,14 +17,22 @@ class Vendor
     }
     public  static function edit(){
         $vendor_id = RequestService::getIntFromGet('vendor_id');
-        $vendors = VendorService::getList();
-
-        smarty()->assign_by_ref('vendors' , $vendors);
-        smarty()->assign_by_ref('vendor_id',$vendor_id);
+        if ($vendor_id){
+            $vendor = VendorService::getEditItem($vendor_id);
+        }else{
+            $vendor = new VendorModel();
+        }
+        smarty()->assign_by_ref('vendor' , $vendor);
         smarty()->display('vendors/edit.tpl');
     }
     public static  function editing(){
-        VendorService::save();
+        $vendor_id = RequestService::getIntFromPost('vendor_id');
+        $name = RequestService::getStringFromPost('name');
+
+        $vendor = new VendorModel();
+        $vendor->setId($vendor_id);
+        $vendor->setName($name);
+        VendorService::save($vendor);
         self::redirectToList();
     }
     public  static  function delete(){

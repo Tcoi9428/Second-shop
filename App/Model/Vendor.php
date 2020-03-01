@@ -4,8 +4,8 @@ namespace App\Model;
 
 class Vendor
 {
-    protected $id = 0;
-    protected $name = ' ';
+    protected $id ;
+    protected $name;
 
     /**
      * @return int

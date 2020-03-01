@@ -12,29 +12,25 @@ class CategoryService
     }
     public static function getList(){
         $query = "SELECT * FROM categories";
-        $categories = DataBase()->fetchAll($query);
+        $categories = DataBase()->fetchAll($query ,Category::class);
         return $categories;
     }
-    public static function save(){
-        $id = RequestService::getIntFromPost('category_id');
-        if($id > 0){
-            self::update();
-        }
-        else{
-            self::create();
-        }
+    public static function getEditItem( int $category_id) :Category{
+        $category_id =$category_id;
+        $query = " SELECT * FROM categories WHERE id=$category_id";
+        $category = DataBase()->fetchRow($query ,Category::class);
+        return $category;
     }
-    private function update(){
-        $id = RequestService::getIntFromPost('category_id');
-        $name = RequestService::getStringFromPost('name');
-        $query = "UPDATE categories SET name='$name' WHERE id=$id";
-        return DataBase()->query($query);
-    }
-
-    private function create(){
-        $name = RequestService::getStringFromPost('name');
-        $query = "INSERT INTO categories (name) VALUES ('$name')";
-        return DataBase()->query($query);
+    public static function save(Category $category){
+        $category_id = RequestService::getIntFromPost('category_id');
+        $data = [
+            'name'=>$category->getName()
+        ];
+        if($category_id > 0){
+            return DataBase()->update('categories',$data , 'id='. $category_id);
+        }else{
+            return DataBase()->insert('categories' , $data);
+        }
     }
     public  static function delete(){
         $delete_id = RequestService::getIntFromPost('delete_id');

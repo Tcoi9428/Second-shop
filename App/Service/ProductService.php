@@ -4,7 +4,9 @@
 namespace App\Service;
 
 
+use App\Model\Category;
 use App\Model\Product;
+use App\Model\Vendor;
 
 class ProductService
 {
@@ -15,15 +17,8 @@ class ProductService
 
     public static  function getList(){
         $query = "SELECT * FROM products";
-        $products = DataBase()->fetchAll($query);
-
-        $query = "SELECT * FROM vendors";
-        $vendors = DataBase()->fetchAll($query);
-
-        $query = "SELECT ct.id , pd.id , ct.name , pdct.product_id , pdct.category_id   FROM categories AS ct , products AS pd , products_categories AS pdct WHERE pd.id = pdct.product_id AND ct.id = pdct.category_id";
-        $categories= DataBase()->fetchAll($query);
-
-        return array($products,$vendors,$categories);
+        $products = DataBase()->fetchAll($query , Product::class);
+        return $products;
     }
 
     /**

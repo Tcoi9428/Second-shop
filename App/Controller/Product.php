@@ -13,11 +13,14 @@ use App\Service\VendorService;
 class Product
 {
     public  static function list(){
-        $products_arr = ProductService::getList();
-        $products = $products_arr[0];
-        $vendors = $products_arr[1];
-        $categories = $products_arr[2];
+//        $products_arr = ProductService::getList();
+//        $products = $products_arr[0];
+//        $vendors = $products_arr[1];
+//        $categories = $products_arr[2];
 
+        $products = ProductService::getList();
+        $vendors = VendorService::getList();
+        $categories = CategoryService::getList();
         smarty()->assign_by_ref('categories',$categories);
         smarty()->assign_by_ref('vendors',$vendors);
         smarty()->assign_by_ref('products',$products);

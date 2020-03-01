@@ -2,39 +2,38 @@
 <div class="row">
     <div class="col-6 mb-4"><a href="/products/edit.php" class="btn btn-success">Добавить товар</a></div>
 </div>
-<h1>Shop-title</h1>
 <div class="row">
-    {foreach from=$products item=e}
+    {foreach from=$products item=product}
         <div class="col-md-4">
         <div class="card mb-4 shadow-sm">
             <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Фото товара</text></svg>
             <div class="card-body">
-                <p class="card-text" style="font-weight:700; font-size: 20px;">{$e.name}</p>
+                <p class="card-text" style="font-weight:700; font-size: 20px;">{$product->getName()}</p>
                 <div class="card-field">
-                    <p class="card-text product-name">Цена:</p><small class="text-muted">{$e.price}</small>
+                    <p class="card-text product-name">Цена:</p><small class="text-muted">{$product->getPrice()}</small>
                 </div>
                 <div class="card-field">
-                    <p class="card-text product-name">Количество:</p><small class="text-muted">{$e.amount}</small>
+                    <p class="card-text product-name">Количество:</p><small class="text-muted">{$product->getAmount()}</small>
                 </div>
                 <div class="card-field">
                     <p class="card-text product-name">Категории:</p>
-                    {foreach from=$categories item=c}
-                        {if $c.product_id == $e.id}
-                            <p class="card-text product-name">{$c.name}</p>
+                    {*foreach from=$categories item=category}
+                        {if $category->getId() == $product->getId()}
+                            <p class="card-text product-name">{$category->getName()}</p>
                         {/if}
-                    {/foreach}
+                    {/foreach*}
                 </div>
                 <div class="card-field">
                     <p class="card-text product-name">Производитель:</p>
-                    {foreach from=$vendors item=z}
-                        {if $z.id == $e.vendor_id}
-                            <p class="card-text product-name">{$z.name}</p>
+                    {foreach from=$vendors item=vendor}
+                        {if $vendor->getId() == $product->getVendorId()}
+                            <p class="card-text product-name">{$vendor->getName()}</p>
                         {/if}
                     {/foreach}
                     <p class="card-text product-name"></p>
                 </div>
                 <div class="card-field">
-                    <p class="card-text product-name">Описание:</p><p class="card-text product-name">{$e.description}</p>
+                    <p class="card-text product-name">Описание:</p><p class="card-text product-name">{$product->getDescription()}</p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">

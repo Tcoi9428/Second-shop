@@ -36,10 +36,13 @@ class MySql
         $this->checkErrors();
         return $result;
     }
-
-    public function fetchAll($query){
+    public function  fetchAll($query, string $class_name) {
         $result = $this->query($query);
-        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+        $data = [];
+        while($row = mysqli_fetch_object($result, $class_name)) {
+            $data[] = $row;
+        }
+        return $data;
     }
     public function fetchRow($query, string $class_name) {
         $result = $this->query($query);
@@ -70,7 +73,6 @@ class MySql
             $insert_values[] = "$key"."=" ."'$value'";
         }
         $insert_values = implode(',',$insert_values);
-        echo '<pre>'; var_dump($insert_values); echo '</pre>';
         $query = "UPDATE $table_name SET $insert_values WHERE $where";
         return $this->query($query);
     }

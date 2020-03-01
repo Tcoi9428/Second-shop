@@ -12,34 +12,36 @@ class VendorService
     }
     public static function getList(){
         $query = "SELECT * FROM vendors";
-        $vendors = DataBase()->fetchAll($query);
+        $vendors = DataBase()->fetchAll($query , Vendor::class);
         return $vendors;
     }
-    public static function save(){
-        $id = RequestService::getIntFromPost('vendor_id');
+
+    /**
+     * @param int $vendor_id
+     * @return Vendor
+     */
+    public  static function getEditItem( int $vendor_id): Vendor{
+        $vendor_id = $vendor_id;
+        $query = " SELECT * FROM vendors WHERE id=$vendor_id";
+        $vendor = DataBase()->fetchRow($query ,Vendor::class);
+        return $vendor;
+    }
+    public static function save(Vendor $vendor){
+        $id = $vendor->getId();
+        $data = [
+            'name'=>$vendor->getName()
+        ];
         if($id > 0){
-            self::update();
+            return DataBase()->update('vendors', $data ,'id=' . $id);
         }
         else{
-            self::create();
+            return DataBase()->insert('vendors',$data);
         }
-    }
-    private function update(){
-        $id = RequestService::getIntFromPost('vendor_id');
-        $name = RequestService::getStringFromPost('name');
-        $query = "UPDATE vendors SET name='$name' WHERE id=$id";
-        return DataBase()->query($query);
-    }
-    private function create(){
-        $name  = RequestService::getStringFromPost('name');
-        $query = "INSERT INTO vendors (name) VALUES ('$name')";
-        return DataBase()->query($query);
     }
     public  static function delete(){
         $delete_id = RequestService::getIntFromPost('delete_id');
         if($delete_id){
-            $query = "DELETE FROM vendors WHERE id = '$delete_id'";
+            return DataBase()->deleteItem('vendors','id='. $delete_id);
         }
-        return DataBase()->query($query);
     }
 }
