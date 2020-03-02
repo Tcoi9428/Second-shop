@@ -13,11 +13,6 @@ use App\Service\VendorService;
 class Product
 {
     public  static function list(){
-//        $products_arr = ProductService::getList();
-//        $products = $products_arr[0];
-//        $vendors = $products_arr[1];
-//        $categories = $products_arr[2];
-
         $products = ProductService::getList();
         $vendors = VendorService::getList();
         $categories = CategoryService::getList();
@@ -48,8 +43,12 @@ class Product
         $amount = RequestService::getIntFromPost('amount');
         $vendor_id = RequestService::getIntFromPost('vendor_id');
         $description = RequestService::getStringFromPost('description');
+        $categories_ids = RequestService::getArrayFromPost('categories_ids');
 
         $product = new ProductModel();
+        if($product_id){
+            $product = ProductService::getEditItem($product_id);
+        }
         $product->setId($product_id);
         $product->setName($name);
         $product->setPrice($price);
@@ -57,8 +56,12 @@ class Product
         $product->setVendorId($vendor_id);
         $product->setDescription($description);
 
+        foreach ($categories_ids as $category_id){
+            $product->addCategoryId($category_id);
+        }
+
        ProductService::save($product);
-        self::redirectToList();
+       self::redirectToList();
     }
     public static function delete(){
         ProductService::delete();

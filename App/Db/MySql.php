@@ -69,6 +69,7 @@ class MySql
         $values = $values;
         $where = $where;
         $insert_values = [];
+        echo '<pre>'; var_dump($values); echo '</pre>';
         foreach ($values as $key=> $value){
             $insert_values[] = "$key"."=" ."'$value'";
         }

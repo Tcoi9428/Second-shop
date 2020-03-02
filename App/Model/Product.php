@@ -124,19 +124,27 @@ class Product
     /**
      * @return array
      */
-    public function getCategoriesId()
+    public function getCategoriesIds()
     {
-        return $this->categories_id;
+        return (array) $this->categories_ids;
     }
 
     /**
      * @param array $categories_ids
      */
-    public function setCategoriesIds($categories_ids)
+    public function addCategoryId($category_id)
     {
-        $this->categories_ids = $categories_ids;
+        $this->categories_ids [] = $category_id;
     }
-
+//    public function removeCategoryId(int $category_id){
+//        $index = array_search($category_id, $this->categories_ids);
+//        if ($index > -1) {
+//            unset($this->categories_ids[$index]);
+//        }
+//    }
+//    public function removeAllCategories(){
+//        $this->categories_ids = [];
+//    }
     /**
      * @return string
      */

@@ -18,16 +18,16 @@
         <label for="product_vendor">Производитель</label>
         <select class="form-control" name="vendor_id" id="product_vendor">
             <option value="0">-</option>
-            {foreach from=$vendors item=e}
-                <option value="{$e.id}" {if $e.id == $product->getVendorId()}selected{/if}>{$e.name}</option>
+            {foreach from=$vendors item=vendor}
+                <option value="{$vendor->getId()}" {if $vendor->getId() == $product->getVendorId()}selected{/if}>{$vendor->getName()}</option>
             {/foreach}
         </select>
     </div>
     <div class="form-group">
         <label for="product_folders">Категории</label>
         <select multiple class="form-control" name="categories_ids[]" id="product_category">
-                {foreach from=$categories item=e}
-                    <option value="{$e.id}" {foreach from=$product item=c} {if $product_id == $c.id && $e.id == $c.category_id} selected {/if}{/foreach}>{$e.name}</option>
+                {foreach from=$categories item=category}
+                    <option value="{$category->getId()}" {*if $category->getId() == } selected {*/if*}>{$category->getName()}</option>
                 {/foreach}
         </select>
     </div>

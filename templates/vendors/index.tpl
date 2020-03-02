@@ -4,12 +4,12 @@
     <div class="col-md-12" style="font-size: 25px;font-width: 700;margin-bottom: 30px;">
         Производители
     </div>
-    {foreach from=$vendors item=e}
+    {foreach from=$vendors item=vendor}
     <div class="col-md-12 category-card">
-        <p class="card-text category-name">{$e.name}</p>
-            <a href="/vendors/edit.php?vendor_id={$e.id}"class="btn btn-primary">Редактировать</a>
+        <p class="card-text category-name">{$vendor->getName()}</p>
+            <a href="/vendors/edit.php?vendor_id={$vendor->getId()}"class="btn btn-primary">Редактировать</a>
         <form action="/vendors/delete.php" method="POST">
-            <input type="hidden" value="{$e.id}" name="delete_id">
+            <input type="hidden" value="{$vendor->getId()}" name="delete_id">
             <button type="submit"  class="btn btn-sm btn-outline-secondary">Удалить</button>
         </form>
     </div>

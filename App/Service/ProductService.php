@@ -46,6 +46,9 @@ class ProductService
         else{
             DataBase()->insert('products',$data);
         }
+        self::insertCategories($product_id , $product->getCategoriesIds());
+
+        return self::getEditItem($product_id);
     }
     public static function delete(){
         $delete_id = RequestService::getIntFromPost('product_id');
@@ -54,4 +57,13 @@ class ProductService
         }
     }
 
+    private static function insertCategories(int $product_id , array $category_ids){
+        $category_ids = array_unique($category_ids);
+        foreach ($category_ids as $category_id){
+            DataBase()->insert('products_categories',[
+               'product_id'=>$product_id,
+               'category_id'=>$category_id
+            ]);
+        }
+    }
 }
