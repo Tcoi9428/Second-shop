@@ -18,7 +18,8 @@ class MySql
         $this->db_name = $db_name;
     }
 
-    private function connect(){
+    private function connect()
+    {
         if(!$this->connect){
             $this->connect = mysqli_connect($this->host , $this->user , $this->password , $this-> db_name);
             mysqli_set_charset($this->connect, 'utf8');
@@ -31,12 +32,14 @@ class MySql
         return $this->connect;
     }
 
-    public function query($query){
+    public function query($query)
+    {
         $result = mysqli_query($this->connect(), $query);
         $this->checkErrors();
         return $result;
     }
-    public function  fetchAll($query, string $class_name) {
+    public function  fetchAll($query, string $class_name)
+    {
         $result = $this->query($query);
         $data = [];
         while($row = mysqli_fetch_object($result, $class_name)) {
@@ -44,12 +47,15 @@ class MySql
         }
         return $data;
     }
-    public function fetchRow($query, string $class_name) {
+    public function fetchRow($query, string $class_name)
+    {
         $result = $this->query($query);
         return mysqli_fetch_object($result, $class_name);
     }
-    public function insert( string $table_name , array $values){
+    public function insert( string $table_name , array $values)
+    {
         $table_name = $this->escape($table_name);
+
         $values  = $values;
         $insert_fields = [];
         $insert_values = [];
@@ -63,13 +69,12 @@ class MySql
         $this->query($query);
         return mysqli_insert_id($this->connect());
     }
-
-    public  function update(string $table_name , array $values , string $where){
+    public  function update(string $table_name , array $values , string $where)
+    {
         $table_name = $table_name;
         $values = $values;
         $where = $where;
         $insert_values = [];
-        echo '<pre>'; var_dump($values); echo '</pre>';
         foreach ($values as $key=> $value){
             $insert_values[] = "$key"."=" ."'$value'";
         }
@@ -77,12 +82,14 @@ class MySql
         $query = "UPDATE $table_name SET $insert_values WHERE $where";
         return $this->query($query);
     }
-    public function deleteItem(string $table_name , string $where){
+    public function deleteItem(string $table_name , string $where)
+    {
         $query = "DELETE FROM $table_name WHERE $where";
         return $this->query($query);
     }
 
-    private function checkErrors() {
+    private function checkErrors()
+    {
         $mysqli_errno = mysqli_errno($this->connect());
         if (!$mysqli_errno) {
             return true;
@@ -91,7 +98,8 @@ class MySql
         $message = "Mysql query error: ($mysqli_errno) $mysqli_error";
         die($message);
     }
-    private function escape(string $value) {
+    private function escape(string $value)
+    {
         return mysqli_real_escape_string($this->connect(), $value);
     }
 }

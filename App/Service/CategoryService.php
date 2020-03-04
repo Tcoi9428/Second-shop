@@ -10,18 +10,21 @@ class CategoryService
     private function  __construct()
     {
     }
-    public static function getList(){
+    public static function getList()
+    {
         $query = "SELECT * FROM categories";
         $categories = DataBase()->fetchAll($query ,Category::class);
         return $categories;
     }
-    public static function getEditItem( int $category_id) :Category{
+    public static function getEditItem( int $category_id):Category
+    {
         $category_id =$category_id;
         $query = " SELECT * FROM categories WHERE id=$category_id";
         $category = DataBase()->fetchRow($query ,Category::class);
         return $category;
     }
-    public static function save(Category $category){
+    public static function save(Category $category)
+    {
         $category_id = RequestService::getIntFromPost('category_id');
         $data = [
             'name'=>$category->getName()
@@ -32,7 +35,8 @@ class CategoryService
             return DataBase()->insert('categories' , $data);
         }
     }
-    public  static function delete(){
+    public  static function delete()
+    {
         $delete_id = RequestService::getIntFromPost('delete_id');
         if($delete_id){
             $query = "DELETE FROM categories WHERE id = '$delete_id'";

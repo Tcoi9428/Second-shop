@@ -10,7 +10,8 @@ class VendorService
     private function  __construct()
     {
     }
-    public static function getList(){
+    public static function getList()
+    {
         $query = "SELECT * FROM vendors";
         $vendors = DataBase()->fetchAll($query , Vendor::class);
         return $vendors;
@@ -20,13 +21,15 @@ class VendorService
      * @param int $vendor_id
      * @return Vendor
      */
-    public  static function getEditItem( int $vendor_id): Vendor{
+    public  static function getEditItem( int $vendor_id): Vendor
+    {
         $vendor_id = $vendor_id;
         $query = " SELECT * FROM vendors WHERE id=$vendor_id";
         $vendor = DataBase()->fetchRow($query ,Vendor::class);
         return $vendor;
     }
-    public static function save(Vendor $vendor){
+    public static function save(Vendor $vendor)
+    {
         $id = $vendor->getId();
         $data = [
             'name'=>$vendor->getName()
@@ -38,7 +41,8 @@ class VendorService
             return DataBase()->insert('vendors',$data);
         }
     }
-    public  static function delete(){
+    public  static function delete()
+    {
         $delete_id = RequestService::getIntFromPost('delete_id');
         if($delete_id){
             return DataBase()->deleteItem('vendors','id='. $delete_id);

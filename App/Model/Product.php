@@ -48,15 +48,6 @@ class Product
     {
         return $this->id;
     }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
     /**
      * @return string
      */
@@ -132,19 +123,10 @@ class Product
     /**
      * @param array $categories_ids
      */
-    public function addCategoryId($category_id)
+    public function addCategoryId(int $category_id) :void
     {
         $this->categories_ids [] = $category_id;
     }
-//    public function removeCategoryId(int $category_id){
-//        $index = array_search($category_id, $this->categories_ids);
-//        if ($index > -1) {
-//            unset($this->categories_ids[$index]);
-//        }
-//    }
-//    public function removeAllCategories(){
-//        $this->categories_ids = [];
-//    }
     /**
      * @return string
      */

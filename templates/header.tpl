@@ -28,6 +28,7 @@
             }
             .card-field{
                 display: flex;
+                flex-wrap: wrap;
             }
             .card-text{
                 margin-right: 10px;

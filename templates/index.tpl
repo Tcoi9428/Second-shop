@@ -17,11 +17,13 @@
                 </div>
                 <div class="card-field">
                     <p class="card-text product-name">Категории:</p>
-                    {*foreach from=$categories item=category}
-                        {if $category->getId() == $product->getId()}
+                    {foreach from=$categories item=category}
+                        {foreach from=$product->getCategoriesIds() item=e}
+                        {if $category->getId() == $e}
                             <p class="card-text product-name">{$category->getName()}</p>
                         {/if}
-                    {/foreach*}
+                        {/foreach}
+                    {/foreach}
                 </div>
                 <div class="card-field">
                     <p class="card-text product-name">Производитель:</p>

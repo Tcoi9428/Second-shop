@@ -27,7 +27,7 @@
         <label for="product_folders">Категории</label>
         <select multiple class="form-control" name="categories_ids[]" id="product_category">
                 {foreach from=$categories item=category}
-                    <option value="{$category->getId()}" {*if $category->getId() == } selected {*/if*}>{$category->getName()}</option>
+                    <option value="{$category->getId()}" {foreach from=$product->getCategoriesIds() item=e}{if $e == $category->getId() }selected{/if}{/foreach}>{$category->getName()}</option>
                 {/foreach}
         </select>
     </div>

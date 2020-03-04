@@ -12,7 +12,8 @@ use App\Service\VendorService;
 
 class Product
 {
-    public  static function list(){
+    public  static function list()
+    {
         $products = ProductService::getList();
         $vendors = VendorService::getList();
         $categories = CategoryService::getList();
@@ -21,7 +22,8 @@ class Product
         smarty()->assign_by_ref('products',$products);
         smarty()->display('index.tpl');
     }
-    public  static function edit(){
+    public  static function edit()
+    {
         $product_id = RequestService::getIntFromGet('product_id');
         if ($product_id){
             $product = ProductService::getEditItem($product_id);
@@ -36,7 +38,8 @@ class Product
         smarty()->display('product/edit.tpl');
     }
 
-    public static function editing(){
+    public static function editing()
+    {
         $product_id = RequestService::getIntFromPost('product_id');
         $name = RequestService::getStringFromPost('name');
         $price = RequestService::getFloatFromPost('price');
@@ -46,10 +49,10 @@ class Product
         $categories_ids = RequestService::getArrayFromPost('categories_ids');
 
         $product = new ProductModel();
+
         if($product_id){
             $product = ProductService::getEditItem($product_id);
         }
-        $product->setId($product_id);
         $product->setName($name);
         $product->setPrice($price);
         $product->setAmount($amount);
@@ -59,15 +62,16 @@ class Product
         foreach ($categories_ids as $category_id){
             $product->addCategoryId($category_id);
         }
-
        ProductService::save($product);
-       self::redirectToList();
+       //self::redirectToList();
     }
-    public static function delete(){
+    public static function delete()
+    {
         ProductService::delete();
         self::redirectToList();
     }
-    private static function redirectToList() {
+    private static function redirectToList()
+    {
         RequestService::redirect('/');
     }
 }

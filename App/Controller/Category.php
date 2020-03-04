@@ -10,12 +10,14 @@ use  App\Model\Category as CategoryModel;
 
 class Category
 {
-    public static function list(){
+    public static function list()
+    {
         $categories = CategoryService::getList();
         smarty()->assign_by_ref('categories' , $categories);
         smarty()->display('categories/index.tpl');
     }
-    public  static function edit(){
+    public  static function edit()
+    {
         $category_id = RequestService::getIntFromGet('category_id');
         if($category_id){
            $category =  CategoryService::getEditItem($category_id);
@@ -25,7 +27,8 @@ class Category
         smarty()->assign_by_ref('category' , $category);
         smarty()->display('categories/edit.tpl');
     }
-    public static  function editing(){
+    public static  function editing()
+    {
         $category_id = RequestService::getIntFromPost('category_id');
         $name = RequestService::getStringFromPost('name');
 
@@ -36,11 +39,13 @@ class Category
         CategoryService::save($category);
         self::redirectToList();
     }
-    public  static  function delete(){
+    public  static  function delete()
+    {
         CategoryService::delete();
         self::redirectToList();
     }
-    private static function redirectToList() {
+    private static function redirectToList()
+    {
         RequestService::redirect('/categories/');
     }
 }
