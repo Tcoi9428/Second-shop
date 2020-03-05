@@ -2,31 +2,31 @@
 
 namespace App\Model;
 
-class Vendor
+class Vendor extends Model
 {
-    protected $id ;
+    /**
+     * @var int
+     */
+    protected $id;
+
+    /**
+     * @var string
+     */
     protected $name;
 
     /**
      * @return int
      */
-    public function getId()
+    public function getId() :int
     {
         return $this->id;
     }
 
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
 
     /**
      * @return string
      */
-    public function getName()
+    public function getName() :string
     {
         return $this->name;
     }
@@ -34,7 +34,7 @@ class Vendor
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName($name) :void
     {
         $this->name = $name;
     }

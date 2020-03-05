@@ -46,26 +46,29 @@ class ProductService
         ];
         
         $product_id = $product->getId();
-        if (is_null($product_id)){
-            DataBase()->insert('products',$data);
+        if (is_null($product_id)|| $product_id < 0){
+             $product_id = DataBase()->insert('products',$data);
         }
         else{
             DataBase()->update('products' , $data , 'id='.$product_id);
+            self::clearCategoryList($product);
         }
         self::insertCategories($product_id , $product->getCategoriesIds());
+
         return static::getEditItem($product_id);
     }
     public static function delete()
     {
         $delete_id = RequestService::getIntFromPost('product_id');
         if($delete_id){
-            return DataBase()->deleteItem('products','id='."$delete_id");
+             DataBase()->deleteItem('products','id='."$delete_id");
+             DataBase()->deleteItem('products_categories','product_id='.$delete_id);
         }
     }
     private static function insertCategories(int $product_id , array $category_ids)
     {
         $category_ids = array_unique($category_ids);
-
+        echo '<pre>'; var_dump($category_ids); echo '</pre>';
         foreach ($category_ids as $category_id){
             DataBase()->insert('products_categories',[
                'product_id' => $product_id,
@@ -107,10 +110,13 @@ class ProductService
                     if ($product->getId() != $product_id) {
                         continue;
                     }
-
                     $product->addCategoryId($category_id);
                 }
             }
         }
+    }
+    private  static function clearCategoryList(Product $product){
+        $product_id = $product->getId();
+        DataBase()->deleteItem('products_categories','product_id='.$product_id);
     }
 }

@@ -84,7 +84,9 @@ class MySql
     }
     public function deleteItem(string $table_name , string $where)
     {
-        $query = "DELETE FROM $table_name WHERE $where";
+        if ($where){
+            $query = "DELETE FROM $table_name WHERE $where";
+        }
         return $this->query($query);
     }
 

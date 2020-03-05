@@ -30,16 +30,18 @@ class VendorService
     }
     public static function save(Vendor $vendor)
     {
-        $id = $vendor->getId();
-        $data = [
-            'name'=>$vendor->getName()
-        ];
-        if($id > 0){
-            return DataBase()->update('vendors', $data ,'id=' . $id);
+        $vendor_id = $vendor->getId();
+        if($vendor_id > 0){
+             $vendor = DataBase()->update('vendors', [
+                 'name'=>$vendor->getName()
+             ],'id=' . $vendor_id);
         }
         else{
-            return DataBase()->insert('vendors',$data);
+            $vendor = DataBase()->insert('vendors',[
+                'name'=> $vendor->getName()
+            ]);
         }
+        return $vendor;
     }
     public  static function delete()
     {

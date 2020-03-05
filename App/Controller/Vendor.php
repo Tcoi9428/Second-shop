@@ -13,6 +13,7 @@ class Vendor
     public static function list()
     {
         $vendors = VendorService::getList();
+
         smarty()->assign_by_ref('vendors' , $vendors);
         smarty()->display('vendors/index.tpl');
     }
@@ -33,8 +34,13 @@ class Vendor
         $name = RequestService::getStringFromPost('name');
 
         $vendor = new VendorModel();
+
+        if ($vendor_id) {
+            $vendor = VendorService::getEditItem($vendor_id);
+        }
         $vendor->setId($vendor_id);
         $vendor->setName($name);
+
         VendorService::save($vendor);
         self::redirectToList();
     }

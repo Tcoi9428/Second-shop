@@ -8,7 +8,6 @@ require_once APP_DIR . '/vendor/autoload.php';
 $config = require_once APP_DIR . '/config/config.php';
 
 
-//$connect = new MySql($config['db']['host'] , $config['db']['user'] ,$config['db']['password'] ,$config['db']['db_name']);
 
 function DataBase(){
     global $config;

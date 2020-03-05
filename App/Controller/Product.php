@@ -28,7 +28,7 @@ class Product
         if ($product_id){
             $product = ProductService::getEditItem($product_id);
         }else{
-            $product =new  ProductModel();
+            $product = new  ProductModel();
         }
         $categories = CategoryService::getList();
         $vendors = VendorService::getList();
@@ -58,12 +58,12 @@ class Product
         $product->setAmount($amount);
         $product->setVendorId($vendor_id);
         $product->setDescription($description);
-
+        $product->removeCategories();
         foreach ($categories_ids as $category_id){
             $product->addCategoryId($category_id);
         }
        ProductService::save($product);
-       //self::redirectToList();
+       self::redirectToList();
     }
     public static function delete()
     {

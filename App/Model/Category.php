@@ -4,7 +4,7 @@
 namespace App\Model;
 
 
-class Category
+class Category extends Model
 {
     protected $id = 0;
     protected $name = ' ';

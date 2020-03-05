@@ -127,6 +127,11 @@ class Product
     {
         $this->categories_ids [] = $category_id;
     }
+
+    public function removeCategories()
+    {
+        $this->categories_ids = [];
+    }
     /**
      * @return string
      */
