@@ -100,7 +100,7 @@ class MySql
         $message = "Mysql query error: ($mysqli_errno) $mysqli_error";
         die($message);
     }
-    private function escape(string $value)
+    public function escape(string $value)
     {
         return mysqli_real_escape_string($this->connect(), $value);
     }

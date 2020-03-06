@@ -38,7 +38,6 @@ class Vendor
         if ($vendor_id) {
             $vendor = VendorService::getEditItem($vendor_id);
         }
-        $vendor->setId($vendor_id);
         $vendor->setName($name);
 
         VendorService::save($vendor);

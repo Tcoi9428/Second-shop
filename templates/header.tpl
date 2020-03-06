@@ -100,9 +100,26 @@
 <main role="main">
 
     <section class="jumbotron text-center">
-        <div class="container">
-            <h1>{$h1}</h1>
-        </div>
+        {if $user->getId()}
+            <div>Вы авторизированны как : {$user->getName()}</div>
+        {else}
+        <form class="form-inline justify-content-center" method="post" action="/user/login.php">
+            <label class="sr-only" for="inlineFormInputName2">Login</label>
+            <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Login" name="login">
+
+            <label class="sr-only" for="inlineFormInputGroupUsername2"></label>
+            <div class="input-group mb-2 mr-sm-2">
+                <input type="password" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Password" name="password">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Submit</button>
+            {*<div class="form-check mb-2 mr-sm-2">
+                <input class="form-check-input" type="checkbox" id="inlineFormCheck">
+                <label class="form-check-label" for="inlineFormCheck">
+                    Remember me
+                </label>
+            </div>*}
+        </form>
+        {/if}
     </section>
 
     <div class="album py-5 bg-light">

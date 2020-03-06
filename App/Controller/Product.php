@@ -24,6 +24,11 @@ class Product
     }
     public  static function edit()
     {
+        $user = user();
+        if (!user()->getId()){
+            die('permission denied');
+        }
+
         $product_id = RequestService::getIntFromGet('product_id');
         if ($product_id){
             $product = ProductService::getEditItem($product_id);
@@ -40,6 +45,11 @@ class Product
 
     public static function editing()
     {
+        if (!user()->getId()){
+            die('permission denied');
+        }
+
+
         $product_id = RequestService::getIntFromPost('product_id');
         $name = RequestService::getStringFromPost('name');
         $price = RequestService::getFloatFromPost('price');
