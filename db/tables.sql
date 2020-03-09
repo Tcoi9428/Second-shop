@@ -29,8 +29,8 @@ CREATE TABLE `products_categories` (
 CREATE TABLE `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE ('email')
+  UNIQUE (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

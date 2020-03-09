@@ -101,12 +101,12 @@
 
     <section class="jumbotron text-center">
         {if $user->getId()}
-            <div>Вы авторизированны как : {$user->getName()}</div>
+            <div>Вы авторизированны как : <a href="/user/edit.php" class="">{$user->getName()}</a></div>
+            <a href="user/logout.php" class="">Выйти</a>
         {else}
         <form class="form-inline justify-content-center" method="post" action="/user/login.php">
             <label class="sr-only" for="inlineFormInputName2">Login</label>
             <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Login" name="login">
-
             <label class="sr-only" for="inlineFormInputGroupUsername2"></label>
             <div class="input-group mb-2 mr-sm-2">
                 <input type="password" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Password" name="password">
@@ -119,6 +119,7 @@
                 </label>
             </div>*}
         </form>
+            <a href="/user/edit.php" class="register">Регистрация</a>
         {/if}
     </section>
 

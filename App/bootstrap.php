@@ -46,4 +46,3 @@ function user(){
 
 session_start();
 smarty()->assign_by_ref('user',user());
-//echo '<pre>'; var_dump($user); echo '</pre>'; exit();

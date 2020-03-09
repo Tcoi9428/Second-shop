@@ -22,6 +22,11 @@ class User extends Model
     private $password = '';
 
     /**
+     * @var string
+     */
+    private $email = '';
+
+    /**
      * @return int
      */
     public function getId(): int
@@ -59,5 +64,21 @@ class User extends Model
     public function setPassword(string $password): void
     {
         $this->password = $password;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
     }
 }
