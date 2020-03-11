@@ -12,22 +12,34 @@ use App\Service\VendorService;
 
 class Product
 {
-    public  static function list()
+    public  static function list($products_on_page)
     {
-        $products = ProductService::getList();
+        $per_page = $products_on_page;
+        $current_page = RequestService::getIntFromGet('page',1);
+        $start = $per_page * ($current_page - 1);
+        $products = [
+          'count'=> ProductService::getCount(),
+          'items'=> ProductService::getList($start , $per_page)
+        ];
         $vendors = VendorService::getList();
         $categories = CategoryService::getList();
+
+        $pagination = [
+            'pages'=> ceil($products['count']/$per_page),
+            'current'=> $current_page
+        ];
         smarty()->assign_by_ref('categories',$categories);
         smarty()->assign_by_ref('vendors',$vendors);
         smarty()->assign_by_ref('products',$products);
+        smarty()->assign_by_ref('pagination',$pagination);
         smarty()->display('index.tpl');
     }
     public  static function edit()
     {
-        $user = user();
-        if (!user()->getId()){
-            die('permission denied');
-        }
+//        $user = user();
+//        if (!user()->getId()){
+//            die('permission denied');
+//        }
 
         $product_id = RequestService::getIntFromGet('product_id');
         if ($product_id){
@@ -45,9 +57,9 @@ class Product
 
     public static function editing()
     {
-        if (!user()->getId()){
-            die('permission denied');
-        }
+//        if (!user()->getId()){
+//            die('permission denied');
+//        }
 
 
         $product_id = RequestService::getIntFromPost('product_id');

@@ -50,4 +50,9 @@ class VendorService
             return DataBase()->deleteItem('vendors','id='. $delete_id);
         }
     }
+    public static function getRandom()
+    {
+        $query = "SELECT * FROM vendors ORDER BY RAND() LIMIT 1";
+        return DataBase()->fetchRow($query,Vendor::class);
+    }
 }

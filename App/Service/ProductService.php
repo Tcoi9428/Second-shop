@@ -15,9 +15,23 @@ class ProductService
     {
     }
 
-    public static  function getList()
+    public static function getCount()
     {
-        $query = "SELECT * FROM products";
+        $query = "SELECT COUNT(*) as count FROM products";
+
+        /**
+         * @var $result Model
+         */
+        $result = DataBase()->fetchRow($query ,Model::class);
+
+        return (int) $result->getProperty('count')?? 0 ;
+
+    }
+    public static  function getList(int $start = 0 , int $limit = 20)
+    {
+
+        $query = "SELECT * FROM products ORDER BY id LIMIT $start , $limit";
+
         $products = DataBase()->fetchAll($query , Product::class);
         self::getCategoryIdsForProducts($products);
         return $products;
@@ -68,7 +82,6 @@ class ProductService
     private static function insertCategories(int $product_id , array $category_ids)
     {
         $category_ids = array_unique($category_ids);
-        echo '<pre>'; var_dump($category_ids); echo '</pre>';
         foreach ($category_ids as $category_id){
             DataBase()->insert('products_categories',[
                'product_id' => $product_id,

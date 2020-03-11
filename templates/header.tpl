@@ -26,12 +26,24 @@
                 -ms-user-select: none;
                 user-select: none;
             }
+            .card-body{
+                border: 2px solid #000;
+            }
             .card-field{
                 display: flex;
                 flex-wrap: wrap;
+                border: 1px solid #000;
+                margin-bottom: 5px;
+                align-items: center;
+                justify-content: center;
+                padding: 5px 10px;
             }
             .card-text{
                 margin-right: 10px;
+                margin-bottom: 0px;
+            }
+            .field-title{
+                font-weight: 700;
             }
             .category-card{
                 display: flex;
@@ -53,6 +65,9 @@
             .category-name{
                 flex-grow: 1;
                 margin-bottom: 0;
+            }
+            .bottom-btn{
+                margin-top: 20px;
             }
             @media (min-width: 768px) {
                 .bd-placeholder-img-lg {

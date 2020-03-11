@@ -43,4 +43,9 @@ class CategoryService
         }
         return DataBase()->query($query);
     }
+    public static function getRandom()
+    {
+        $query = "SELECT * FROM categories ORDER BY RAND() LIMIT 1";
+        return DataBase()->fetchRow($query,Category::class);
+    }
 }
