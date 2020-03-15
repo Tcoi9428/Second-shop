@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Service\CartService;
 use App\Service\CategoryService;
 use App\Service\ProductService;
 use App\Service\RequestService;
@@ -12,6 +13,15 @@ use App\Service\VendorService;
 
 class Product
 {
+    public static function buy()
+    {
+        $product_id = RequestService::getIntFromGet('product_id');
+        $product = ProductService::getEditItem($product_id);
+        CartService::addProduct($product);
+
+
+        RequestService::redirect($_SERVER['HTTP_REFERER']);
+    }
     public  static function list($products_on_page)
     {
         $per_page = $products_on_page;
@@ -36,11 +46,6 @@ class Product
     }
     public  static function edit()
     {
-//        $user = user();
-//        if (!user()->getId()){
-//            die('permission denied');
-//        }
-
         $product_id = RequestService::getIntFromGet('product_id');
         if ($product_id){
             $product = ProductService::getEditItem($product_id);
@@ -57,11 +62,6 @@ class Product
 
     public static function editing()
     {
-//        if (!user()->getId()){
-//            die('permission denied');
-//        }
-
-
         $product_id = RequestService::getIntFromPost('product_id');
         $name = RequestService::getStringFromPost('name');
         $price = RequestService::getFloatFromPost('price');

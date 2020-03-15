@@ -37,6 +37,7 @@
                 align-items: center;
                 justify-content: center;
                 padding: 5px 10px;
+                text-align: center;
             }
             .card-text{
                 margin-right: 10px;
@@ -59,15 +60,29 @@
                 background: #ccc;
                 color: #000000;
             }
-            .btn-primary{
-                margin-right: 10px;
-            }
             .category-name{
                 flex-grow: 1;
                 margin-bottom: 0;
             }
             .bottom-btn{
                 margin-top: 20px;
+            }
+            .shop-cart{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                padding: 30px;
+                div{
+                    display: flex;
+                }
+            }
+            section.jumbotron.text-center{
+                margin-bottom: 0;
+                padding: 20px 2rem;
+            }
+            .product-btn{
+                margin-right: 10px;
             }
             @media (min-width: 768px) {
                 .bd-placeholder-img-lg {
@@ -113,7 +128,6 @@
 </header>
 
 <main role="main">
-
     <section class="jumbotron text-center">
         {if $user->getId()}
             <div>Вы авторизированны как : <a href="/user/edit.php" class="">{$user->getName()}</a></div>
@@ -137,6 +151,18 @@
             <a href="/user/edit.php" class="register">Регистрация</a>
         {/if}
     </section>
-
+    <div class="shop-cart">
+        <h3>Корзина</h3>
+        <div class="total_amount-block">
+            <span class="">Количевство товара :{$cart->getAmount()}</span> <span class=""></span>
+        </div>
+        <div class="total_price-block">
+            <span class="">Общая сумма :{$cart->getPrice()}</span> <span class=""></span>
+        </div>
+        <div class="cart-buttons">
+            <a href="" class=" mb-2 btn btn-success">Оформить заказ</a>
+            <a href="/cart/clear.php" class=" btn mb-2 btn-danger">Очистить коризну</a>
+        </div>
+    </div>
     <div class="album py-5 bg-light">
         <div class="container">

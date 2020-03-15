@@ -12,7 +12,7 @@ for ($i = 0; $i < 100; $i++){
     $product = new Product();
 
     $product->setName($faker->name);
-    $product->setPrice($faker->randomFloat( 3 ,1 ,550));
+    $product->setPrice($faker->randomFloat( 1 ,1 ,700));
     $product->setAmount($faker->numberBetween(1,1000));
     $product->setDescription($faker->text(200));
 

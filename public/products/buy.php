@@ -1,5 +1,7 @@
 <?php
-use App\Controller\Category;
+
+use App\Controller\Product;
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../App/bootstrap.php';
 
-Category::list();
+Product::buy();

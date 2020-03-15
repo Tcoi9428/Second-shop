@@ -1,6 +1,7 @@
 <?php
 
 use App\Db\MySql;
+use App\Service\CartService;
 
 define('APP_DIR' , __DIR__ . "/../" );
 
@@ -43,6 +44,13 @@ function user(){
     }
    return $user;
 }
-
+function cart(){
+    static  $cart;
+    if(is_null($cart)){
+        $cart = CartService::getCart();
+    }
+    return $cart;
+}
 session_start();
+smarty()->assign_by_ref('cart',cart());
 smarty()->assign_by_ref('user',user());

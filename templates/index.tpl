@@ -52,10 +52,11 @@
                 </div>
                 <div class="d-flex justify-content-between align-items-center bottom-btn">
                     <div class="btn-group">
-                        <a href="/products/edit.php?product_id={$product->getId()}" class="btn btn-sm btn-primary">Редактировать</a>
-                        <form action="/products/delete.php" method="POST">
+                        <a href="/products/buy.php?product_id={$product->getId()}" class=" product-btn btn btn-sm btn-success">Купить</a>
+                        <a href="/products/edit.php?product_id={$product->getId()}" class=" product-btn btn btn-sm btn-primary">Редактировать</a>
+                        <form action="/products/delete.php" method="POST" >
                             <input type="hidden" value="{$product->getId()}" name="product_id">
-                             <button type="submit"  class="btn btn-sm btn btn-danger">Удалить</button>
+                             <button type="submit"  class="btn btn-sm btn-danger">Удалить</button>
                         </form>
                     </div>
                 </div>
